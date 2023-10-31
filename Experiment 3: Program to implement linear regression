@@ -1,0 +1,65 @@
+Experiment 3: Program to implement linear regression
+AIM:
+To implement simple linear regression and multiple linear regression using python
+
+
+CODE:
+Simple Linear Regression (Prerequisite: Boston dataset)
+import pandas as pd
+data = pd.read_csv('C:/Users/91979/Downloads/Boston.csv')
+data.head()
+#Have a glance at the dependent and independent variables
+data_=data.loc[:,['LSTAT','MEDV']]
+data_.head(5)
+#Visualize the change in the variables
+import matplotlib.pyplot as plt
+data.plot(x='LSTAT', y='MEDV', style = 'o')
+plt.xlabel('lstat')
+plt.ylabel('medv')
+plt.show()
+#Divide the data into independent and dependent variables
+x=pd.DataFrame(data['LSTAT'])
+y=pd.DataFrame(data['MEDV'])
+#Split the data into train and test sets
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x, y,test_size=0.2,random_state=1)
+#Shape of the train and test sets
+print(x_train.shape)
+print(x_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+# Train the algorithm
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(x_train, y_train)
+#Predicted value
+y_pred = regressor.predict(x_test)
+y_pred
+#Actual value
+y_test
+
+
+
+MULTIPLE LINEAR
+import pandas as pd
+data = pd.read_csv('C:/Users/91979/Downloads/Boston.csv')
+data
+#Set up dependent and independent variable
+x = pd.DataFrame(data.iloc[:,:-1])
+y = pd.DataFrame(data.iloc[:,-1])
+#Divide the data into train and test sets
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x, y,test_size=0.2,random_state=5)
+#Shape of the train and test sets
+print(x_train.shape)
+print(x_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+# Train the algorithm
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(x_train, y_train)
+#Comparing the predicted value to the actual value
+y_pred = regressor.predict(x_test)
+y_pred
+y_test
