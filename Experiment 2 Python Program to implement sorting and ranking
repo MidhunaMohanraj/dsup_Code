@@ -1,0 +1,38 @@
+Experiment 2 Python Program to implement sorting and ranking
+AIM:
+To sort and rank the data in a list in Python
+
+CODE:
+SORTING
+import pandas as pd
+import numpy as np
+s = pd.Series(range(5),index = ['e', 'd', 'a', 'b', 'c'])
+s
+#Sorting for Series
+s.sort_index()
+#Sorting for Data Frame
+df = pd.DataFrame(np.arange(12).reshape(3,4),
+index = ['Two', 'One', 'Three'],
+columns = ['d','a','b','c']
+)
+df
+#sort by index
+df.sort_index()
+#sort by columns
+df.sort_index(axis=1)
+
+
+RANKING
+import pandas as pd
+df = pd.DataFrame({
+"name": ["John","Jane","Emily","Lisa","Matt","Jenny","Adam"],
+"current": [92,94,87,82,90,78,84],
+"overall": [184,173,184,201,208,182,185],
+"group":["A","B","C","A","A","C","B"]
+})
+df
+df["rank_default"] = df["overall"].rank()
+df
+df["rank_default_desc"] = df["overall"].rank(ascending=False)
+df = df.sort_values(by="rank_default_desc", ignore_index=True)
+df
